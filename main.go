@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/redis/go-redis/v9"
 )
@@ -18,8 +19,8 @@ type ScoreEntry struct {
 
 func main() {
 	client := redis.NewClient(&redis.Options{
-		Addr:     "redis-18483.c305.ap-south-1-1.ec2.redns.redis-cloud.com:18483",
-		Password: "FJeBSktS2q2P2QGBLMsyiekmtjGynLLz",
+		Addr:     os.Getenv("DB_ADDR"),
+		Password: os.Getenv("DB_PASSWORD"),
 		DB:       0,
 	})
 
