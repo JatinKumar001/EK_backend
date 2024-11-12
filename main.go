@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/redis/go-redis/v9"
 )
@@ -92,6 +93,11 @@ func main() {
 		}
 	})
 
-	log.Println("Server is running on port 8080...")
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080" // default to 8080 if no PORT is set
+	}
+
+	log.Printf("Server is running on port %s...", port)
+	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
